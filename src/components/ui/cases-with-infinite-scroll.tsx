@@ -175,7 +175,7 @@ function Case() {
       <style jsx>{`
           /* Cylindrical infinite scroll with 3D transforms */
           .bg-muted {
-              background-color: #f1f5f8;
+              background-color: #f1f5f9;
           }
           .dark .bg-muted {
               background-color: #1e293b;
