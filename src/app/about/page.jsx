@@ -9,16 +9,16 @@ import {
   LinkedInIcon,
   XIcon,
 } from '@/components/SocialIcons'
-import portraitImage from '@/images/portrait.jpg'
+import portraitImage from '../../../public/images/portrait.jpg'
 
 function SocialLink({ className, href, children, icon: Icon }) {
   return (
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500 dark:text-zinc-200 dark:hover:text-teal-500"
+        className="group flex text-sm font-medium text-[#381900FF] transition hover:text-[#89B9AD] dark:text-[#dfc28d] dark:hover:text-[#89B9AD]"
       >
-        <Icon className="h-6 w-6 flex-none fill-zinc-500 transition group-hover:fill-teal-500" />
+        <Icon className="h-6 w-6 flex-none fill-[#2c1500] dark:fill-[#dfc28d] transition group-hover:fill-[#89B9AD]" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -52,15 +52,15 @@ export default function About() {
               src={portraitImage}
               alt=""
               sizes="(min-width: 1024px) 32rem, 20rem"
-              className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
+              className="aspect-square rotate-3 rounded-2xl bg-background object-cover dark:bg-background"
             />
           </div>
         </div>
         <div className="lg:order-first lg:row-span-2">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
+          <h1 className="text-4xl font-bold tracking-tight text-[#2c1500] sm:text-5xl dark:text-[#dfc28d]">
             I’m Snehil Sundriyal, born and raised in Chandigarh, India (IN).
           </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <div className="mt-6 space-y-7 text-base text-[#40210b] dark:text-[#b09a76]">
             <p>
               I’ve loved making things for as long as I can remember, and wrote
               my first program when I was 6 years old, just two weeks after my
@@ -106,7 +106,7 @@ export default function About() {
             <SocialLink
               href="mailto:snehilsundriyal@gmail.com"
               icon={MailIcon}
-              className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
+              className="mt-8 border-t border-[#2c1500] pt-8 dark:border-[#dfc28d]"
             >
               snehilsundriyal@gmail.com
             </SocialLink>

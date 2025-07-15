@@ -7,21 +7,22 @@ import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
 import {
   GitHubIcon,
-  InstagramIcon,
   LinkedInIcon,
   XIcon,
 } from '@/components/SocialIcons'
-import logoAirbnb from '@/images/logos/airbnb.svg'
-import logoFacebook from '@/images/logos/facebook.svg'
-import logoPlanetaria from '@/images/logos/planetaria.svg'
-import logoStarbucks from '@/images/logos/starbucks.svg'
-import image1 from '@/images/photos/image-1.jpg'
-import image2 from '@/images/photos/image-2.jpg'
-import image3 from '@/images/photos/image-3.jpg'
-import image4 from '@/images/photos/image-4.jpg'
-import image5 from '@/images/photos/image-5.jpg'
+import logoAirbnb from '../../public/images/logos/airbnb.svg'
+import logoFacebook from '../../public/images/logos/facebook.svg'
+import logoPlanetaria from '../../public/images/logos/planetaria.svg'
+import logoStarbucks from '../../public/images/logos/starbucks.svg'
+import image1 from '../../public/image-1.jpg'
+import image2 from '../../public/image-2.jpg'
+import image3 from '../../public/image-3.jpg'
+import image4 from '../../public/image-4.jpg'
+import image5 from '../../public/image-5.jpg'
 import { getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { FlipWords } from '@/components/ui/flip-words';
+import { Case } from '@/components/ui/cases-with-infinite-scroll'
 
 function MailIcon(props) {
   return (
@@ -36,11 +37,11 @@ function MailIcon(props) {
     >
       <path
         d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+        className="fill-[#bea882] stroke-[#1C0F00FF] dark:fill-[#1c0f00] dark:stroke-[#bea882]"
       />
       <path
         d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
+        className="stroke-[#1C0F00FF] dark:stroke-[#bea882]"
       />
     </svg>
   )
@@ -59,11 +60,11 @@ function BriefcaseIcon(props) {
     >
       <path
         d="M2.75 9.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
+        className="fill-[#bea882] stroke-[#1C0F00FF] dark:fill-[#1c0f00] dark:stroke-[#bea882]"
       />
       <path
         d="M3 14.25h6.249c.484 0 .952-.002 1.316.319l.777.682a.996.996 0 0 0 1.316 0l.777-.682c.364-.32.832-.319 1.316-.319H21M8.75 6.5V4.75a2 2 0 0 1 2-2h2.5a2 2 0 0 1 2 2V6.5"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
+        className="stroke-[#1C0F00FF] dark:stroke-[#bea882]"
       />
     </svg>
   )
@@ -100,7 +101,7 @@ function Article({ article }) {
 function SocialLink({ icon: Icon, ...props }) {
   return (
     <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400 dark:group-hover:fill-zinc-300" />
+      <Icon className="h-6 w-6 fill-[#1C0F00FF] transition group-hover:fill-[#4F2A10FF] dark:fill-[#dfc28d] dark:group-hover:fill-[#b09a76]" />
     </Link>
   )
 }
@@ -109,13 +110,13 @@ function Newsletter() {
   return (
     <form
       action="/thank-you"
-      className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40"
+      className="rounded-2xl border border-[#2c1500] p-6 dark:border-black"
     >
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <h2 className="flex text-sm font-semibold text-[#2c1500] dark:text-[#dfc28d]">
         <MailIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Stay up to date</span>
       </h2>
-      <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
+      <p className="mt-2 text-sm text-[#40120b] dark:text-[#b09a76]">
         Get notified when I publish something new, and unsubscribe at any time.
       </p>
       <div className="mt-6 flex items-center">
@@ -125,7 +126,7 @@ function Newsletter() {
             placeholder="Email address"
             aria-label="Email address"
             required
-            className="w-full appearance-none rounded-[calc(var(--radius-md)-1px)] bg-white px-3 py-[calc(--spacing(2)-1px)] shadow-md shadow-zinc-800/5 outline outline-zinc-900/10 placeholder:text-zinc-400 focus:ring-4 focus:ring-teal-500/10 focus:outline-teal-500 sm:text-sm dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:outline-zinc-700 dark:placeholder:text-zinc-500 dark:focus:ring-teal-400/10 dark:focus:outline-teal-400"
+            className="w-full appearance-none rounded-[calc(var(--radius-md)-1px)] bg-white px-3 py-[calc(--spacing(2)-1px)] shadow-md shadow-zinc-800/5 outline outline-[#2c1500] placeholder:text-[#40210b] focus:ring-4 focus:ring-teal-800/10 focus:outline-teal-800 sm:text-sm dark:bg-gray-300 dark:text-[#2c1500] dark:outline-black dark:placeholder:text-[#40210b] dark:focus:ring-teal-400/10 dark:focus:outline-teal-400"
           />
         </span>
         <Button type="submit" className="ml-4 flex-none">
@@ -254,6 +255,8 @@ function Photos() {
   )
 }
 
+const words = ["obsessive web developer.", "engineer.", "amateur musician."]
+
 export default async function Home() {
   let articles = (await getAllArticles()).slice(0, 4)
 
@@ -262,12 +265,26 @@ export default async function Home() {
       <Container className="mt-9">
         <link rel="icon" href="/favicon.ico" />
 
-        <div className="max-w-2xl">
-          <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            Software designer, engineer, and an amateur musician.
+        <div className="max-w-4xl">
+          <h1 className="grid grid-cols-2 text-5xl font-bold tracking-tight text-[#2c1500] sm:text-5xl dark:text-[#dfc28d]">
+            <div className="col-span-2 ml-2">
+              Hey, I am Snehil and I am an
+            </div>
+
+
+            <div className="col-span-2">
+              <FlipWords
+                duration={2000}
+                words={words}
+                className=""
+              />{" "}
+            </div>
+
+
           </h1>
-          <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Snehil, a software designer, born and raised in Chandigarh,
+
+          <p className="mt-6 text-base text-[#40210b] dark:text-[#b09a76]">
+            I’m a software designer, born and raised in Chandigarh,
             India. I’m a student at BITS Pilani, Pilani, Rajasthan, India (IN). I am
             currently pursuing an M.Sc. in Physics and B.E. in Electronics and
             Electrical Engineering.
@@ -278,11 +295,11 @@ export default async function Home() {
               aria-label="Follow on X"
               icon={XIcon}
             />
-            {/*<SocialLink*/}
-            {/*  href="#"*/}
-            {/*  aria-label="Follow on Instagram"*/}
-            {/*  icon={InstagramIcon}*/}
-            {/*/>*/}
+            <SocialLink
+              href="mailto:snehilsundriyal@gmail.com"
+              icon={MailIcon}
+              aria-label="Contact Me"
+            />
             <SocialLink
               href="https://github.com/SnehilSundriyal"
               aria-label="Follow on GitHub"
@@ -296,8 +313,10 @@ export default async function Home() {
           </div>
         </div>
       </Container>
-      <Photos />
-      <Container className="mt-24 md:mt-28">
+
+      <Case />
+      {/*<Photos />*/}
+      <Container className="mt-10 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
             {articles.map((article) => (

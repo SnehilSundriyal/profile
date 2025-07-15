@@ -14,7 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
-import avatarImage from '@/images/avatar.jpg'
+import avatarImage from '../../public/images/avatar.jpg'
 
 function CloseIcon(props) {
   return (
@@ -90,29 +90,29 @@ function MobileNavItem({ href, children }) {
 function MobileNavigation(props) {
   return (
     <Popover {...props}>
-      <PopoverButton className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
+      <PopoverButton className="group flex items-center rounded-full bg-[#dfc28d]/90 px-4 py-2 text-sm font-medium text-[#231100FF] shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:text-[#dfc28d] dark:ring-[#b09a76]/20 dark:hover:ring-[#b09a76]/40">
         Menu
-        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-zinc-500 group-hover:stroke-zinc-700 dark:group-hover:stroke-zinc-400" />
+        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-[#231100FF] group-hover:stroke-[#40210b] dark:stroke-[#b09a76] dark:group-hover:stroke-[#dfc28d]" />
       </PopoverButton>
       <PopoverBackdrop
         transition
-        className="fixed inset-0 z-50 bg-zinc-800/40 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-black/80"
+        className="fixed inset-0 z-50 bg-[#231100FF]/40 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-[#231100FF]/80"
       />
       <PopoverPanel
         focus
         transition
-        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-white p-8 ring-1 ring-zinc-900/5 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-zinc-900 dark:ring-zinc-800"
+        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-[#dfc28d] p-8 ring-1 ring-[#b09a76]/20 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-[#40210b] dark:ring-[#b09a76]/30"
       >
         <div className="flex flex-row-reverse items-center justify-between">
           <PopoverButton aria-label="Close menu" className="-m-1 p-1">
-            <CloseIcon className="h-6 w-6 text-zinc-500 dark:text-zinc-400" />
+            <CloseIcon className="h-6 w-6 text-[#231100FF] dark:text-[#b09a76]" />
           </PopoverButton>
-          <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
+          <h2 className="text-sm font-medium text-[#40210b] dark:text-[#b09a76]">
             Navigation
           </h2>
         </div>
         <nav className="mt-6">
-          <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800 dark:divide-zinc-100/5 dark:text-zinc-300">
+          <ul className="-my-2 divide-y divide-[#b09a76]/20 text-base text-[#231100FF] dark:divide-[#b09a76]/10 dark:text-[#dfc28d]">
             <MobileNavItem href="/about">About</MobileNavItem>
             <MobileNavItem href="/articles">Articles</MobileNavItem>
             <MobileNavItem href="/projects">Projects</MobileNavItem>
@@ -135,13 +135,13 @@ function NavItem({ href, children }) {
         className={clsx(
           'relative block px-3 py-2 transition',
           isActive
-            ? 'text-teal-500 dark:text-teal-400'
-            : 'hover:text-teal-500 dark:hover:text-teal-400',
+            ? 'text-[#16610e] dark:text-[#b6f500]'
+            : 'hover:text-[#16610e] dark:hover:text-[#b6f500]',
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-teal-500/0 via-teal-500/40 to-teal-500/0 dark:from-teal-400/0 dark:via-teal-400/40 dark:to-teal-400/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-[#16610e]/0 via-[#16610e]/40 to-[#16610e]/0 dark:from-[#b6f500]/0 dark:via-[#b6f500]/40 dark:to-[#b6f500]/0" />
         )}
       </Link>
     </li>
@@ -151,7 +151,7 @@ function NavItem({ href, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
+      <ul className="flex rounded-full bg-[#bea882]/90 px-3 text-sm font-medium text-[#231100FF] shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:text-[#dfc28d] dark:ring-[#b09a76]/20">
         <NavItem href="/about">About</NavItem>
         <NavItem href="/articles">Articles</NavItem>
         <NavItem href="/projects">Projects</NavItem>
@@ -175,11 +175,11 @@ function ThemeToggle() {
     <button
       type="button"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm transition dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
+      className="group rounded-full bg-[#b6f500]/90 px-3 py-2 shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm transition dark:bg-[#16610e]/90 dark:ring-[#b09a76]/20 dark:hover:ring-[#b09a76]/40 hover:bg-[#16610e] dark:hover:bg-[#b6f500]"
       onClick={() => setTheme(otherTheme)}
     >
-      <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-teal-50 [@media(prefers-color-scheme:dark)]:stroke-teal-500 [@media(prefers-color-scheme:dark)]:group-hover:fill-teal-50 [@media(prefers-color-scheme:dark)]:group-hover:stroke-teal-600" />
-      <MoonIcon className="hidden h-6 w-6 fill-zinc-700 stroke-zinc-500 transition not-[@media_(prefers-color-scheme:dark)]:fill-teal-400/10 not-[@media_(prefers-color-scheme:dark)]:stroke-teal-500 dark:block [@media(prefers-color-scheme:dark)]:group-hover:stroke-zinc-400" />
+      <SunIcon className="h-6 w-6 fill-[#b09a76] stroke-[#40210b] transition group-hover:fill-[#dfc28d] group-hover:stroke-[#40210b] dark:hidden [@media(prefers-color-scheme:dark)]:fill-[#dfc28d] [@media(prefers-color-scheme:dark)]:stroke-[#40210b] [@media(prefers-color-scheme:dark)]:group-hover:fill-[#40210b] [@media(prefers-color-scheme:dark)]:group-hover:stroke-[#b09a76]" />
+      <MoonIcon className="hidden h-6 w-6 fill-[#40210b] stroke-[#dfc28d] transition not-[@media_(prefers-color-scheme:dark)]:fill-[#dfc28d]/20 not-[@media_(prefers-color-scheme:dark)]:stroke-[#b6f500] dark:block [@media(prefers-color-scheme:dark)]:group-hover:fill-[#dfc28d] [@media(prefers-color-scheme:dark)]:group-hover:stroke-[#40210b]" />
     </button>
   )
 }
@@ -195,7 +195,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg ring-1 shadow-zinc-800/5 ring-zinc-900/5 backdrop-blur-sm dark:bg-zinc-800/90 dark:ring-white/10',
+        'h-10 w-10 rounded-full bg-[#dfc28d]/90 p-0.5 shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:ring-[#b09a76]/20',
       )}
       {...props}
     />
@@ -215,7 +215,7 @@ function Avatar({ large = false, className, ...props }) {
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
-          'rounded-full bg-zinc-100 object-cover dark:bg-zinc-800',
+          'rounded-full bg-[#dfc28d] object-cover dark:bg-[#231100FF]',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
@@ -344,7 +344,7 @@ export function Header() {
           <>
             <div
               ref={avatarRef}
-              className="order-last mt-[calc(--spacing(16)-(--spacing(3)))]"
+              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
             />
             <Container
               className="top-0 order-last -mb-3 pt-3"
@@ -353,7 +353,7 @@ export function Header() {
               }}
             >
               <div
-                className="top-(--avatar-top,--spacing(3)) w-full"
+                className="top-[var(--avatar-top,theme(spacing.3))] w-full"
                 style={{
                   position: 'var(--header-inner-position)',
                 }}
@@ -384,7 +384,7 @@ export function Header() {
           }}
         >
           <Container
-            className="top-(--header-top,--spacing(6)) w-full"
+            className="top-[var(--header-top,theme(spacing.6))] w-full"
             style={{
               position: 'var(--header-inner-position)',
             }}
