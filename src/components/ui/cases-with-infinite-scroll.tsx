@@ -80,27 +80,18 @@ function Case() {
     return Math.max(minScale, Math.min(maxScale, scale));
   };
 
-  // Function to calculate opacity based on position using cosine wave
-  const getOpacityForPosition = (index, currentRotation = 0) => {
-    // Calculate the actual angle considering the current rotation
+  // Function to get visibility style for image
+  const getVisibilityStyle = (index) => {
+    // Calculate the base angle for this image
     const baseAngle = index * (360 / imageCount);
-    const actualAngle = (baseAngle + currentRotation) % 360;
 
-    // Convert to radians for cosine calculation
-    const angleInRadians = (actualAngle * Math.PI) / 180;
-
-    // Use cosine wave for smooth opacity transition
-    const cosValue = Math.cos(angleInRadians);
-
-    // Map cosine values to opacity range
-    // Front (cos = 1): opacity 1.0
-    // Side (cos = 0): opacity 0.8
-    // Back (cos = -1): opacity 0.3
-    const minOpacity = 0.3;
-    const maxOpacity = 1.0;
-    const opacity = minOpacity + ((cosValue + 1) / 2) * (maxOpacity - minOpacity);
-
-    return Math.max(minOpacity, Math.min(maxOpacity, opacity));
+    // Use CSS to hide elements based on their rotated position
+    // This creates a more stable hiding mechanism
+    return {
+      backfaceVisibility: 'hidden',
+      // Add a CSS custom property that we can use for visibility
+      '--base-angle': `${baseAngle}deg`
+    };
   };
 
   return (
@@ -142,6 +133,8 @@ function Case() {
               >
                 {allImages.map((image, index) => {
                   const scale = getScaleForPosition(index, currentRotation);
+                  const visibilityStyle = getVisibilityStyle(index);
+
                   return (
                     <div
                       key={`image-${index}`}
@@ -149,8 +142,9 @@ function Case() {
                       style={{
                         transformStyle: 'preserve-3d',
                         transform: `rotateY(${index * (360 / imageCount)}deg) translateZ(${radius}px) scale(${scale})`,
-                        willChange: 'transform, opacity',
-                        transition: 'none' // Disable CSS transitions for smooth animation
+                        willChange: 'transform',
+                        transition: 'none',
+                        ...visibilityStyle
                       }}
                     >
                       <div className="aspect-square bg-muted rounded-md flex items-center justify-center overflow-hidden relative">
