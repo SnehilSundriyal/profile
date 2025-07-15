@@ -1,0 +1,194 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+
+function Case() {
+  const scrollContainerRef = useRef(null);
+  const [isPaused, setIsPaused] = useState(false);
+  const [currentRotation, setCurrentRotation] = useState(0);
+  const scrollSpeed = 0.5; // in ppf
+
+
+  const cylinderWidth = 1800;
+  const imageCount = 20; // displaying 20 images
+  const faceWidth = cylinderWidth / imageCount;
+  const radius = 1000;
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationId;
+    let rotationAngle = 0;
+
+    const scroll = () => {
+      if (!isPaused && container) {
+        // for cylindrical motion
+        rotationAngle += scrollSpeed * 0.2; // Adjust multiplier for speed
+
+        // main container rotation
+        container.style.transform = `rotateY(${rotationAngle}deg)`;
+
+        // current rotation state is updated for scaling calculations
+        setCurrentRotation(rotationAngle);
+      }
+
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    scroll();
+
+    return () => {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
+    };
+  }, [isPaused, scrollSpeed]);
+
+  const images = Array.from({ length: 15 }).map((_, index) => ({
+    id: index,
+    src: `/image-${index + 1}.jpg`,
+    alt: `Image ${index + 1}`,
+    fallback: `Logo ${index + 1}`
+  }));
+
+  const allImages = [];
+  for (let i = 0; i < imageCount; i++) {
+    allImages.push({
+      ...images[i % images.length],
+      id: i
+    });
+  }
+
+  // uses cos wave to scale smoothly
+  const getScaleForPosition = (index, currentRotation = 0) => {
+    // calculate actual angle considering current rotation
+    const baseAngle = index * (360 / imageCount);
+    const actualAngle = (baseAngle + currentRotation) % 360;
+
+    const angleInRadians = (actualAngle * Math.PI) / 180;
+
+    const cosValue = Math.cos(angleInRadians);
+
+    // front image: cos value = 0: scale 1
+    // side image: cos value = 0: scale 0.7
+    // back image: cos value = -1: scale 0.4
+    const minScale = 0.4;
+    const maxScale = 1.0;
+    const scale = minScale + ((cosValue + 1) / 2) * (maxScale - minScale);
+
+    return Math.max(minScale, Math.min(maxScale, scale));
+  };
+
+  // Function to calculate opacity based on position using cosine wave
+  const getOpacityForPosition = (index, currentRotation = 0) => {
+    // Calculate the actual angle considering the current rotation
+    const baseAngle = index * (360 / imageCount);
+    const actualAngle = (baseAngle + currentRotation) % 360;
+
+    // Convert to radians for cosine calculation
+    const angleInRadians = (actualAngle * Math.PI) / 180;
+
+    // Use cosine wave for smooth opacity transition
+    const cosValue = Math.cos(angleInRadians);
+
+    // Map cosine values to opacity range
+    // Front (cos = 1): opacity 1.0
+    // Side (cos = 0): opacity 0.8
+    // Back (cos = -1): opacity 0.3
+    const minOpacity = 0.3;
+    const maxOpacity = 1.0;
+    const opacity = minOpacity + ((cosValue + 1) / 2) * (maxOpacity - minOpacity);
+
+    return Math.max(minOpacity, Math.min(maxOpacity, opacity));
+  };
+
+  return (
+    <div className="w-99vw mt-16 px-4">
+      <div className="flex flex-col gap-10">
+        <div className="relative">
+          <div
+            className="relative w-full overflow-hidden flex justify-center items-center bg-[#bea882] dark:bg-[#1c0f00]"
+            style={{
+              height: '40vh',
+              perspective: '1000px',
+              transformStyle: 'preserve-3d'
+            }}
+          >
+
+            {/* Top border */}
+            <div className="absolute top-0 left-0 w-full h-[1px] pointer-events-none z-10">
+              <div className="w-full h-full bg-[linear-gradient(to_right,_#bea882_0%,_#bea882_5%,_#2c1500_15%,_#2c1500_85%,_#bea882_95%,_#bea882_100%)] dark:bg-[linear-gradient(to_right,_#1c0f00_0%,_#1c0f00_5%,_#f3c297_15%,_#f3c297_85%,_#1c0f00_95%,_#1c0f00_100%)]" />
+            </div>
+
+            {/* Bottom border */}
+            <div className="absolute bottom-0 left-0 w-full h-[1px] pointer-events-none z-10">
+              <div className="w-full h-full bg-[linear-gradient(to_right,_#bea882_0%,_#bea882_5%,_#2c1500_15%,_#2c1500_85%,_#bea882_95%,_#bea882_100%)] dark:bg-[linear-gradient(to_right,_#1c0f00_0%,_#1c0f00_5%,_#f3c297_15%,_#f3c297_85%,_#1c0f00_95%,_#1c0f00_100%)]" />
+            </div>
+
+            {/* Cylindrical Infinite Scroll Container */}
+            <div className="w-full py-6 overflow-hidden">
+              <div
+                ref={scrollContainerRef}
+                className="relative flex justify-center items-center"
+                style={{
+                  width: cylinderWidth,
+                  height: "330px",
+                  transformStyle: 'preserve-3d',
+                  willChange: 'transform'
+                }}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
+              >
+                {allImages.map((image, index) => {
+                  const scale = getScaleForPosition(index, currentRotation);
+                  return (
+                    <div
+                      key={`image-${index}`}
+                      className="absolute flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-2"
+                      style={{
+                        transformStyle: 'preserve-3d',
+                        transform: `rotateY(${index * (360 / imageCount)}deg) translateZ(${radius}px) scale(${scale})`,
+                        willChange: 'transform, opacity',
+                        transition: 'none' // Disable CSS transitions for smooth animation
+                      }}
+                    >
+                      <div className="aspect-square bg-muted rounded-md flex items-center justify-center overflow-hidden relative">
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          className="w-full h-full object-cover rounded-md"
+                          onError={(e) => {
+                            const target = e.currentTarget;
+                            target.style.display = "none";
+                            const fallback = target.nextElementSibling;
+                            if (fallback) fallback.style.display = "flex";
+                          }}
+                        />
+                        <div className="absolute inset-0 hidden items-center justify-center text-sm text-black dark:text-white bg-muted rounded-md">
+                          {image.fallback}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+          /* Cylindrical infinite scroll with 3D transforms */
+          .bg-muted {
+              background-color: #f1f5f9;
+          }
+          .dark .bg-muted {
+              background-color: #1e293b;
+          }
+      `}</style>
+    </div>
+  );
+}
+
+export { Case };
