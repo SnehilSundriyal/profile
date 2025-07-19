@@ -266,8 +266,8 @@ export default async function Home() {
         <link rel="icon" href="/favicon.ico" />
 
         <div className="max-w-4xl">
-          {/* Adjusted grid for better responsiveness on smaller screens */}
-          <h1 className="grid grid-cols-1 sm:grid-cols-2 text-4xl sm:text-5xl font-bold tracking-tight text-[#2c1500] dark:text-[#dfc28d]">
+          <h1
+            className="grid grid-cols-1 sm:grid-cols-2 text-4xl sm:text-5xl font-bold tracking-tight text-[#2c1500] dark:text-[#dfc28d]">
             <div className="col-span-1 sm:col-span-2 ml-2">
               Hey, I am Snehil and I am an
             </div>
@@ -311,8 +311,10 @@ export default async function Home() {
         </div>
       </Container>
 
-      <Case />
-      {/*<Photos />*/}
+      <div className="hidden lg:block"><Case /></div>
+      <div className="lg:hidden"><Photos /></div>
+
+
       <Container className="mt-10 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
