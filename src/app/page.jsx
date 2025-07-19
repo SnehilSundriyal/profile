@@ -117,7 +117,7 @@ function Newsletter() {
         <span className="ml-3">Stay up to date</span>
       </h2>
       <p className="mt-2 text-sm text-[#40120b] dark:text-[#b09a76]">
-        Get notified when I publish something new, and unsubscribe at any time.
+        Get notified when I publish something new.
       </p>
       <div className="mt-6 flex items-center">
         <span className="flex min-w-0 flex-auto p-px">
@@ -210,19 +210,19 @@ function Resume() {
   ]
 
   return (
-    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
-      </h2>
-      <ol className="mt-6 space-y-4">
-        {resume.map((role, roleIndex) => (
-          <Role key={roleIndex} role={role} />
-        ))}
-      </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
+    <div className="rounded-2xl border border-[#2c1500] p-6 dark:border-[#dfc28d]">
+      {/*<h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">*/}
+      {/*  <BriefcaseIcon className="h-6 w-6 flex-none" />*/}
+      {/*  <span className="ml-3">Work</span>*/}
+      {/*</h2>*/}
+      {/*<ol className="mt-6 space-y-4">*/}
+      {/*  {resume.map((role, roleIndex) => (*/}
+      {/*    <Role key={roleIndex} role={role} />*/}
+      {/*  ))}*/}
+      {/*</ol>*/}
+      <Button href="#" variant="primary" className="group w-full">
         Download CV
-        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+        <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-[#2c1500] dark:stroke-[#2c1500] dark:group-hover:stroke-white dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
   )
@@ -281,7 +281,7 @@ export default async function Home() {
           </h1>
 
           <p className="mt-6 text-base text-[#40210b] dark:text-[#b09a76]">
-            I’m a software designer, born and raised in Chandigarh,
+            I’m a software developer, born and raised in Chandigarh,
             India. I’m a student at BITS Pilani, Pilani, Rajasthan, India (IN). I am
             currently pursuing an M.Sc. in Physics and B.E. in Electronics and
             Electrical Engineering.
@@ -324,7 +324,7 @@ export default async function Home() {
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             <Newsletter />
-            {/*<Resume />*/}
+            <Resume />
           </div>
         </div>
       </Container>

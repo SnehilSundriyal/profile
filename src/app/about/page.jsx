@@ -16,9 +16,9 @@ function SocialLink({ className, href, children, icon: Icon }) {
     <li className={clsx(className, 'flex')}>
       <Link
         href={href}
-        className="group flex text-sm font-medium text-[#381900FF] transition hover:text-[#89B9AD] dark:text-[#dfc28d] dark:hover:text-[#89B9AD]"
+        className="group flex text-sm font-medium text-[#381900FF] transition hover:text-[#06923E] dark:text-[#dfc28d] dark:hover:text-[#06923E]"
       >
-        <Icon className="h-6 w-6 flex-none fill-[#2c1500] dark:fill-[#dfc28d] transition group-hover:fill-[#89B9AD]" />
+        <Icon className="h-6 w-6 flex-none fill-[#2c1500] dark:fill-[#dfc28d] transition group-hover:fill-[#06923E]" />
         <span className="ml-4">{children}</span>
       </Link>
     </li>
@@ -62,30 +62,24 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-[#40210b] dark:text-[#b09a76]">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              I have always been surrounded by gadgets and technology in my household,
+              getting to play video games, listen to music, watch my favourite animated movies, (Ice Age II every weekend was a must!),
+              on my computer, since the age of 2.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              At the age of 13, I stumbled upon a YouTube video - <em>The ULTIMATE RGB PC Build Guide!</em>.
+              Being a kid obsessed with video games, it made me realise how I only knew very little of the <em>ENORMOUS</em> world of technology, and for me it hasn't stopped growing since!
+              I spent a few hours a day learning more about how PC components work together to make my favourite games playable.
+              I worked with my Uncle on various different motherboards during summer breaks, helping him assemble and/or fix a bunch of PCs for his clients.
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              A few years down the line, that interest evolved into building highly functional and scalable applications,
+              contributing drop by drop in this vast ocean of technology, stretching endlessly into our future. I also dwell in
+              IoT, attempting to build better and more useful devices, which, at the very least convey my ability to build, and to enjoy the process of it all.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              As of now, I am only a student at Birla Institute of Technology & Science (BITS) Pilani, Pilani Campus. I am pursuing an M.Sc. in Physics as well as
+              a B.E. in Electronics & Electrical Engineering, graduating in 2027. I am open to interning/working part time remotely. You have means to contact me in case you wish to know more.
             </p>
           </div>
         </div>

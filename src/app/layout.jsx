@@ -30,10 +30,10 @@ export const metadata = {
   title: {
     template: '%s - Snehil Sundriyal',
     default:
-      'Snehil - Software designer, engineer and a musician.',
+      'Snehil - Software developer, engineer and a musician.',
   },
   description:
-    'I’m Snehil Sundriyal, a software designer based in Chandigarh, India. I’m a student in BITS Pilani, Pilani, Rajasthan. I am currently pursuing an M.Sc. in Physics and B.E. in Electronics and Electrical Engineering.',
+    'I’m Snehil Sundriyal, a software developer based in Chandigarh, India. I’m a student in BITS Pilani, Pilani, Rajasthan. I am currently pursuing an M.Sc. in Physics and B.E. in Electronics and Electrical Engineering.',
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
