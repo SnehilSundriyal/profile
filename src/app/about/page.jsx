@@ -68,7 +68,7 @@ export default function About() {
             </p>
             <p>
               At the age of 13, I stumbled upon a YouTube video - <em>The ULTIMATE RGB PC Build Guide!</em>.
-              Being a kid obsessed with video games, it made me realise how I only knew very little of the <em>ENORMOUS</em> world of technology, and for me it hasn't stopped growing since!
+              Being a kid obsessed with video games, it made me realise how I only knew very little of the <em>ENORMOUS</em> world of technology, and for me it hasn’t stopped growing since!
               I spent a few hours a day learning more about how PC components work together to make my favourite games playable.
               I worked with my Uncle on various different motherboards during summer breaks, helping him assemble and/or fix a bunch of PCs for his clients.
             </p>
