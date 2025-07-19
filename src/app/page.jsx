@@ -266,21 +266,18 @@ export default async function Home() {
         <link rel="icon" href="/favicon.ico" />
 
         <div className="max-w-4xl">
-          <h1 className="grid grid-cols-2 text-5xl font-bold tracking-tight text-[#2c1500] sm:text-5xl dark:text-[#dfc28d]">
-            <div className="col-span-2 ml-2">
+          {/* Adjusted grid for better responsiveness on smaller screens */}
+          <h1 className="grid grid-cols-1 sm:grid-cols-2 text-4xl sm:text-5xl font-bold tracking-tight text-[#2c1500] dark:text-[#dfc28d]">
+            <div className="col-span-1 sm:col-span-2 ml-2">
               Hey, I am Snehil and I am an
             </div>
-
-
-            <div className="col-span-2">
+            <div className="col-span-1 sm:col-span-2">
               <FlipWords
                 duration={2000}
                 words={words}
                 className=""
               />{" "}
             </div>
-
-
           </h1>
 
           <p className="mt-6 text-base text-[#40210b] dark:text-[#b09a76]">

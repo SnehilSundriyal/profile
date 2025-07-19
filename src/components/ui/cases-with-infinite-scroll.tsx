@@ -8,11 +8,11 @@ function Case() {
   const [currentRotation, setCurrentRotation] = useState(0);
   const scrollSpeed = 0.5; // in ppf
 
-
-  const cylinderWidth = 1800;
-  const imageCount = 20; // displaying 20 images
+  // Adjusted cylinderWidth and imageCount for better responsiveness
+  const cylinderWidth = 1200; // Reduced for smaller screens, will be managed by responsiveness
+  const imageCount = 15; // Adjusted to avoid too many images being squished
   const faceWidth = cylinderWidth / imageCount;
-  const radius = 1000;
+  const radius = 800; // Adjusted radius, can be further responsive if needed
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -70,7 +70,7 @@ function Case() {
 
     const cosValue = Math.cos(angleInRadians);
 
-    // front image: cos value = 0: scale 1
+    // front image: cos value = 1: scale 1
     // side image: cos value = 0: scale 0.7
     // back image: cos value = -1: scale 0.4
     const minScale = 0.4;
@@ -95,7 +95,7 @@ function Case() {
   };
 
   return (
-    <div className="w-99vw mt-16 px-4">
+    <div className="w-full mt-16 px-4"> {/* Changed w-99vw to w-full */}
       <div className="flex flex-col gap-10">
         <div className="relative">
           <div
@@ -121,9 +121,9 @@ function Case() {
             <div className="w-full py-6 overflow-hidden">
               <div
                 ref={scrollContainerRef}
-                className="relative flex justify-center items-center"
+                className="relative flex justify-center items-center mx-auto" // Added mx-auto for horizontal centering
                 style={{
-                  width: cylinderWidth,
+                  width: 'min(100%, 1200px)', // Made width responsive, maxing out at 1200px
                   height: "330px",
                   transformStyle: 'preserve-3d',
                   willChange: 'transform'
@@ -138,7 +138,8 @@ function Case() {
                   return (
                     <div
                       key={`image-${index}`}
-                      className="absolute flex-none w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 p-2"
+                      // Adjusted responsive widths for images
+                      className="absolute flex-none w-1/3 xs:w-1/4 sm:w-1/5 md:w-1/6 lg:w-[12.5%] p-2"
                       style={{
                         transformStyle: 'preserve-3d',
                         transform: `rotateY(${index * (360 / imageCount)}deg) translateZ(${radius}px) scale(${scale})`,
@@ -179,6 +180,12 @@ function Case() {
           }
           .dark .bg-muted {
               background-color: #1e293b;
+          }
+          /* Added a breakpoint for extra small screens for image width */
+          @media (max-width: 479px) { /* Tailwind's default 'sm' is 640px. 'xs' is typically ~475px or can be defined */
+              .xs\\:w-1\\/4 {
+                  width: 25%;
+              }
           }
       `}</style>
     </div>
