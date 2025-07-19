@@ -8,11 +8,10 @@ function Case() {
   const [currentRotation, setCurrentRotation] = useState(0);
   const scrollSpeed = 0.5; // in ppf
 
-  // Adjusted cylinderWidth and imageCount for better responsiveness
-  const cylinderWidth = 1200; // Reduced for smaller screens, will be managed by responsiveness
-  const imageCount = 15; // Adjusted to avoid too many images being squished
+  const cylinderWidth = 1800;
+  const imageCount = 15;
   const faceWidth = cylinderWidth / imageCount;
-  const radius = 800; // Adjusted radius, can be further responsive if needed
+  const radius = 1200;
 
   useEffect(() => {
     const container = scrollContainerRef.current;
@@ -80,51 +79,45 @@ function Case() {
     return Math.max(minScale, Math.min(maxScale, scale));
   };
 
-  // Function to get visibility style for image
+  // gets visibility style for image
   const getVisibilityStyle = (index) => {
-    // Calculate the base angle for this image
+    // base angle for this image
     const baseAngle = index * (360 / imageCount);
 
-    // Use CSS to hide elements based on their rotated position
-    // This creates a more stable hiding mechanism
     return {
       backfaceVisibility: 'hidden',
-      // Add a CSS custom property that we can use for visibility
       '--base-angle': `${baseAngle}deg`
     };
   };
 
   return (
-    <div className="w-full mt-16 px-4"> {/* Changed w-99vw to w-full */}
+    <div className="w-full mt-16 px-4">
       <div className="flex flex-col gap-10">
         <div className="relative">
           <div
             className="relative w-full overflow-hidden flex justify-center items-center bg-[#bea882] dark:bg-[#1c0f00]"
             style={{
-              height: '40vh',
+              height: '50vh',
               perspective: '1000px',
               transformStyle: 'preserve-3d'
             }}
           >
 
-            {/* Top border */}
             <div className="absolute top-0 left-0 w-full h-[1px] pointer-events-none z-10">
               <div className="w-full h-full bg-[linear-gradient(to_right,_#bea882_0%,_#bea882_5%,_#2c1500_15%,_#2c1500_85%,_#bea882_95%,_#bea882_100%)] dark:bg-[linear-gradient(to_right,_#1c0f00_0%,_#1c0f00_5%,_#f3c297_15%,_#f3c297_85%,_#1c0f00_95%,_#1c0f00_100%)]" />
             </div>
 
-            {/* Bottom border */}
             <div className="absolute bottom-0 left-0 w-full h-[1px] pointer-events-none z-10">
               <div className="w-full h-full bg-[linear-gradient(to_right,_#bea882_0%,_#bea882_5%,_#2c1500_15%,_#2c1500_85%,_#bea882_95%,_#bea882_100%)] dark:bg-[linear-gradient(to_right,_#1c0f00_0%,_#1c0f00_5%,_#f3c297_15%,_#f3c297_85%,_#1c0f00_95%,_#1c0f00_100%)]" />
             </div>
 
-            {/* Cylindrical Infinite Scroll Container */}
             <div className="w-full py-6 overflow-hidden">
               <div
                 ref={scrollContainerRef}
-                className="relative flex justify-center items-center mx-auto" // Added mx-auto for horizontal centering
+                className="relative flex justify-center items-center mx-auto"
                 style={{
-                  width: 'min(100%, 1200px)', // Made width responsive, maxing out at 1200px
-                  height: "330px",
+                  width: 'min(100%, 1800px)',
+                  height: "500px",
                   transformStyle: 'preserve-3d',
                   willChange: 'transform'
                 }}
@@ -138,8 +131,7 @@ function Case() {
                   return (
                     <div
                       key={`image-${index}`}
-                      // Adjusted responsive widths for images
-                      className="absolute flex-none w-1/3 xs:w-1/4 sm:w-1/5 md:w-1/6 lg:w-[12.5%] p-2"
+                      className="absolute flex-none w-2/3 xs:w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 p-2" // Adjusted widths
                       style={{
                         transformStyle: 'preserve-3d',
                         transform: `rotateY(${index * (360 / imageCount)}deg) translateZ(${radius}px) scale(${scale})`,
@@ -174,17 +166,15 @@ function Case() {
       </div>
 
       <style jsx>{`
-          /* Cylindrical infinite scroll with 3D transforms */
           .bg-muted {
               background-color: #f1f5f9;
           }
           .dark .bg-muted {
               background-color: #1e293b;
           }
-          /* Added a breakpoint for extra small screens for image width */
-          @media (max-width: 479px) { /* Tailwind's default 'sm' is 640px. 'xs' is typically ~475px or can be defined */
-              .xs\\:w-1\\/4 {
-                  width: 25%;
+          @media (max-width: 479px) {
+              .xs\\:w-1\\/2 { 
+                  width: 50%;
               }
           }
       `}</style>
