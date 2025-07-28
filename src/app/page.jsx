@@ -311,8 +311,9 @@ export default async function Home() {
         </div>
       </Container>
 
-      <div className="hidden lg:block"><Case /></div>
-      <div className="lg:hidden"><Photos /></div>
+      {/*<div className="hidden lg:block"><Case /></div>*/}
+      {/*<div className="lg:hidden"><Photos /></div>*/}
+      <Photos />
 
 
       <Container className="mt-10 md:mt-28">

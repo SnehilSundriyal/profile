@@ -44,8 +44,8 @@ export default async function ArticlesIndex() {
 
   return (
     <SimpleLayout
-      title="Writing on software design, photonics, IoT and, very occasionally, music."
-      intro="All of my long-form thoughts on programming, leadership, product design, and more, collected in chronological order."
+      title="Writing on software design, IoT, photonics and, very occasionally, music."
+      intro="A collection of my evolving perspectives and discoveries."
     >
       <div className="md:border-l md:border-[#2c1500] md:pl-6 md:dark:border-[#dfc28d]">
         <div className="flex max-w-3xl flex-col space-y-16">

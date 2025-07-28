@@ -7,14 +7,15 @@ import logoCosmos from '../../../public/images/logos/cosmos.svg'
 import logoHelioStream from '../../../public/images/logos/helio-stream.svg'
 import logoOpenShuttle from '../../../public/images/logos/open-shuttle.svg'
 import logoPlanetaria from '../../../public/images/logos/planetaria.svg'
+import brainwave from '../../../public/images/logos/Gemini_Generated_Image_v4mhgjv4mhgjv4mh.svg'
 
 const projects = [
   {
-    name: 'Planetaria',
+    name: 'Brainwave',
     description:
-      'Creating technology to empower civilians to explore space on their own terms.',
-    link: { href: 'http://planetaria.tech', label: 'planetaria.tech' },
-    logo: logoPlanetaria,
+      'A frontend made in react.',
+    link: { href: 'https://brainwave-sooty-psi.vercel.app/', label: 'Link to website' },
+    logo: brainwave,
   },
   {
     name: 'Animaginary',
