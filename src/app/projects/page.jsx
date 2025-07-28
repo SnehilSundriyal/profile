@@ -6,15 +6,14 @@ import logoAnimaginary from '../../../public/images/logos/animaginary.svg'
 import logoCosmos from '../../../public/images/logos/cosmos.svg'
 import logoHelioStream from '../../../public/images/logos/helio-stream.svg'
 import logoOpenShuttle from '../../../public/images/logos/open-shuttle.svg'
-import logoPlanetaria from '../../../public/images/logos/planetaria.svg'
-import brainwave from '../../../public/images/logos/Gemini_Generated_Image_v4mhgjv4mhgjv4mh.svg'
+import brainwave from '../../../public/images/logos/brain-3-svgrepo-com.svg'
 
 const projects = [
   {
     name: 'Brainwave',
     description:
       'A frontend made in react.',
-    link: { href: 'https://brainwave-sooty-psi.vercel.app/', label: 'Link to website' },
+    link: { href: 'https://brainwave-sooty-psi.vercel.app/', label: 'Link to Brainwave' },
     logo: brainwave,
   },
   {
