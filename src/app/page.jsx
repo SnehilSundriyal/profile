@@ -50,7 +50,7 @@ function MailIcon(props) {
 function BriefcaseIcon(props) {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox="0 0 24 "
       fill="none"
       strokeWidth="1.5"
       strokeLinecap="round"
