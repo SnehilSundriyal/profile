@@ -1,9 +1,9 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 
 export const article = {
-  author: 'Adam Wathan',
-  date: '2022-09-02',
-  title: 'Introducing Animaginary: High performance web animations',
+  author: 'Snehil Sundriyal',
+  date: '2025-12-13',
+  title: 'Enabling Wireless Robot Navigation Through Web-Based MQTT Communication',
   description:
     'When you’re building a website for a company as ambitious as Planetaria, you need to make an impression. I wanted people to visit our website and see animations that looked more realistic than reality itself.',
 }
@@ -19,21 +19,34 @@ When you’re building a website for a company as ambitious as Planetaria, you n
 
 To make this possible, we needed to squeeze every drop of performance out of the browser possible. And so Animaginary was born.
 
-```js
-import { animate } from '@planetaria/animaginary'
+```go
+import mqtt "github.com/eclipse/paho.mqtt.golang"
 
-export function MyComponent({ open, children }) {
-  return (
-    <animate.div
-      in={open}
-      animateFrom="opacity-0 scale-95"
-      animateTo="opacity-100 scale-100"
-      duration={350}
-    >
-      {children}
-    </animate.div>
-  )
+...
+
+// configuring MQTT connection to broker
+options := mqtt.NewClientOptions()
+options.AddBroker("tcp://broker.hivemq.com:1883")
+options.SetClientID("web-controller")
+options.SetKeepAlive(60 * time.Second)
+
+// create an MQTT client (for this broker)
+client := mqtt.NewClient(options)
+
+// connect this client (stm32) to the broker
+token := client.Connect()
+token.Wait()
+if token.Error() != nil {
+    log.Fatal("connection attempt failed - ", token.Error())
 }
+
+// subscribe to updates sent by STM32
+client.Subscribe("robot/status", 0, func(client mqtt.Client, msg mqtt.Message) {
+    log.Println("current status - ", msg.Payload())
+})
+
+// publish commands to STM32
+client.Publish("robot/control", 0, false, "FORWARD")
 ```
 
 Animaginary is our new web animation library that redefines what you thought was possible on the web. Hand-written in optimized WASM, Animaginary can even animate the `height` property of an element at 60fps.

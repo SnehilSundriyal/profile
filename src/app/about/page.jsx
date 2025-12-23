@@ -62,8 +62,8 @@ export default function About() {
           </h1>
           <div className="mt-6 space-y-7 text-base text-[#40210b] dark:text-[#b09a76]">
             <p>
-              I have always been surrounded by gadgets and technology in my household,
-              getting to play video games, listen to music, watch my favourite animated movies, (Ice Age II every weekend was a must!),
+              I have always been surrounded by gadgets and technology in my household -
+              playing video games, listening to music, watching my favourite animated movies (must watch Ice Age II every weekend!),
               on my computer, since the age of 2.
             </p>
             <p>

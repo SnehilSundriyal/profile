@@ -1,0 +1,202 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Snehil Sundriyal',
+  date: '2025-12-23',
+  title: 'Getting Started with AI in My Go Projects',
+  description:
+    'My struggle of finding motivation to learn something new, finally ended last night, as I came across a video titled - This AI Plans Your Vacation in Seconds! (Golang + LangChain).',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+My struggle of finding motivation to learn something new, finally ended last night, as I came across a video titled - [This AI Plans Your Vacation in Seconds! (Golang + LangChain)](https://www.youtube.com/watch?v=M3DDouQ_90I&t=3486s) by [Akhil Sharma](https://www.youtube.com/@AkhilSharmaTech). As a person who loves writing programs, striving to learn what is necessary to create better softwares, I thought of AI and LLMs as the obvious next step in the journey towards my goals. Here's how those first steps went.
+
+```bash
+# creating a vacation with a POST request
+snehil@pop-os:~/GolandProjects/ai-go/vacation-planner$ curl -X POST -H "Content-type: application/json" \
+  -d '{"favorite_season": "summer", "hobbies": ["surfing","running"], "budget": 1000}' \
+  http://localhost:8080/vacation/create
+
+# response
+{"id":"d2e824a2-76B5-4e5b-b835-f7323ae8d2ce","completed":false}
+
+# fetching the itinerary with a GET request
+snehil@pop-os:~/GolandProjects/ai-go/vacation-planner$ curl -X GET -H "Content-type: application/json" \
+  http://localhost:8080/vacation/d2e824a2-76B5-4e5b-b835-f7323ae8d2ce
+
+#response
+{"id":"d2e824a2-76B5-4e5b-b835-f7323ae8d2ce","completed":true,\n"idea":"Based on your interests in surfing and running, I have created a vacation itinerary for you within your budget of $1000. I will suggest a destination that is great for surfing and running in the summer.\n\nDestination: San Diego, California\n\nDay 1:\n- Check into a budget-friendly hostel or Airbnb near the beach.\n- In the afternoon, explore the iconic Pacific Beach boardwalk and rent a surfboard to catch some waves.\n- Enjoy a sunset run along the Mission Beach or La Jolla Shores beach.\n\nDay 2:\n- Start your day with a morning run at Torrey Pines State Natural Reserve, offering stunning coastal views and challenging trails.\n- After your run, head to La Jolla Cove for some snorkeling or kayaking in the crystal-clear waters.\n- In the evening, grab lunch at a local taco shop and watch the sunset at Sunset Cliffs Natural Park.\n\nDay 3:\n- Take a day trip to the nearby Balboa Park, known for its late-back and culture and beautiful beaches.\n- Spend the day surfing at Swami's Beach in Encinitas or running along the coastal trails at San Elijo Lagoon Ecological Reserve.\n- Explore the charming downtown area of Encinitas and grab a healthy post-surf or meal.\n\nDay 4:\n- Return to San Diego in the evening and relax at the beach or enjoy a bonfire with new friends.\n\nDay 5:\n- Before departing, squeeze in one last surf session or morning run along the beach.\n- Check out of your accommodation and head to the airport with unforgettable memories of your active and adventurous vacation in San Diego.\n\nTotal estimated cost: The total cost for accommodation (3 nights in a budget-friendly hostel or Airbnb): Food and activities: $400.\n- Transportation (including airport transfers and day trip to Encinitas): Miscellaneous: $100.\n\nTotal: $1000.\n\nI hope you enjoy this itinerary and have an amazing vacation in San Diego!"}
+```
+
+The idea of this was very simple. Using the [LangChain Go module](https://github.com/tmc/langchaingo) to work with OpenAI, the tutorial showed me how to build prompt templates with user preferences and let LangChain handle the rest. The example project was a travel agent that suggests your perfect vacation - you just feed the model your favorite season, hobbies and budget!
+
+## Setting Up the API with Gin
+Alright, so quickly skimming through something I was already familiar with, the [Gin framework](https://github.com/gin-gonic/gin) was used for routing. For those unfamiliar, Gin is a popular HTTP web framework in Go that makes building REST APIs simple and fast.
+
+The application sets up two routes under the /vacation path. The first, `POST /vacation/create`, accepts a JSON request with the user's favorite season, hobbies, and budget. Gin's `BindJSON` method automatically parses this into a Go struct, which then gets passed to the vacation generation function. The second route, `GET /vacation/:id`, retrieves a vacation by its UUID - Gin extracts the ID from the URL, and we return either the completed itinerary or an error if it doesn't exist.
+
+```go
+package routes
+
+import (
+	"github.com/SnehilSundriyal/vacation-planner/chains"
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"net/http"
+)
+
+func GetVacationRouter(router *gin.Engine) *gin.Engine {
+    vacationRoutes := router.Group("/vacation")
+
+    vacationRoutes.POST("/create", func(c *gin.Context) {
+        var req GenerateVacationIdeaRequest
+        if err := c.BindJSON(&req); err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request: could not bind request json"})
+            return
+        }
+        c.JSON(http.StatusOK, generateVacation(req))
+    })
+
+    vacationRoutes.GET("/:id", func(c *gin.Context) {
+        id, err := uuid.Parse(c.Param("id"))
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request: could not parse id"})
+            return
+        }
+
+        resp, err := getVacation(id)
+        if err != nil {
+            c.JSON(http.StatusBadRequest, gin.H{"message": "Bad Request: could not find vacation"})
+            return
+        }
+        c.JSON(http.StatusOK, resp)
+    })
+
+    return router
+}
+```
+
+What I appreciated about Gin here is how little boilerplate is needed. You define your routes, handle the request, return a response - no wrestling with manual JSON parsing or complex routing logic.
+
+
+## The Data Structure
+
+The application uses three main structs to handle the vacation generation workflow:
+
+### 1. The Request:
+```go
+type GenerateVacationIdeaRequest struct {
+    FavoriteSeason string   `json:"favorite_season"`
+    Hobbies        []string `json:"hobbies"`
+    Budget         int      `json:"budget"`
+}
+```
+This captures what the user sends in the `POST` request - their favorite season, hobbies, and budget. The JSON tags ensure the fields map correctly when Gin binds the incoming request.
+### 2. The Initial Response:
+```go
+type GenerateVacationIdeaResponse struct {
+    Id        uuid.UUID `json:"id"`
+    Completed bool      `json:"completed"`
+}
+```
+When a vacation request is created, the API immediately returns a `UUID` and a `completed: false` status. This allows the user to track the request while the AI generates the itinerary in the background.
+### 3. The Core Data Model:
+```go
+type Vacation struct {
+    Id        uuid.UUID `json:"id"`
+    Completed bool      `json:"completed"`
+    Idea      string    `json:"idea"`
+}
+```
+This is the internal representation that stores the generated vacation itinerary. Once the LLM finishes generating the travel plan, the `Idea` field gets populated with the full itinerary text and `Completed` flips to true.
+### 4. The Final Response:
+```go
+type GetVacationIdeaResponse struct {
+    Id        uuid.UUID `json:"id"`
+    Completed bool      `json:"completed"`
+    Idea      string    `json:"idea"`
+}
+```
+When the user retrieves their vacation via `GET` request, they receive this complete response with the AI-generated itinerary in the `Idea` field.
+
+The flow is straightforward: request comes in → UUID generated → AI processes → full itinerary returned.
+
+## Bringing in the AI: LangChain and OpenAI
+Now that we are done with how this AI client was initialised and its end workflow, it is time to talk about the core AI integration - how LangChain structures prompts and communicates with OpenAI to turn user preferences into personalized vacation itineraries.
+
+### 1. Setting up the LLM client:
+```go
+apiKey := os.Getenv("OPENAI_API_KEY")
+llm, err := openai.New(openai.WithToken(apiKey))
+if err != nil {
+    log.Println("Error: ", err)
+    return
+}
+```
+First, I initialized the OpenAI LLM client using my API key.
+
+### 2. Creating the prompt templates:
+```go
+systemMessagePromptString := `You are an AI travel agent that will help me create a vacation idea.
+My favorite season is {{.season}}.
+My hobbies include {{.hobbies}}.
+My budget is {{.budget}} dollars.
+`
+systemMessagePrompt := prompts.NewSystemMessagePromptTemplate(
+    systemMessagePromptString,
+    []string{"season", "hobbies", "budget"},
+)
+
+humanMessagePromptString := "write a travel itenerary for me"
+humanMessagePrompt := prompts.NewHumanMessagePromptTemplate(humanMessagePromptString, []string{})
+
+chatPrompt := prompts.NewChatPromptTemplate([]prompts.MessageFormatter{
+    systemMessagePrompt,
+    humanMessagePrompt,
+})
+```
+The next step was building the prompts. LangChain uses templates with placeholders like `{{.season}}` and `{{.budget}}` that get filled in later. I created a system message template that tells the AI it's a travel agent and includes those user preference variables. The human message template is simpler - just 'write a travel itinerary for me' with no variables. Both templates are then combined into a chat prompt that implements LangChain's `MessageFormatter` interface.
+
+### 3. Filling in the template values:
+```go
+vals := map[string]any{
+    "season": season,
+    "budget": budget,
+    "hobbies": strings.Join(hobbies, ","),
+}
+
+msgs, err := chatPrompt.FormatMessages(vals)
+if err != nil {
+    log.Println("Error: ", err)
+    return
+}
+```
+Next, I populated a map called `vals` with the actual user data from the request. The `FormatMessages` method takes this map and replaces all the `{{.season}}`, `{{.budget}}`, and `{{.hobbies}}` placeholders in the templates with the real values, giving us the complete prompts to send to OpenAI.
+
+### 4. Sending to OpenAI and getting the response:
+```go
+content := []llms.MessageContent{
+    llms.TextParts(msgs[0].GetType(), msgs[0].GetContent()),
+    llms.TextParts(msgs[1].GetType(), msgs[1].GetContent()),
+}
+
+completion, err := llm.GenerateContent(ctx, content)
+if err != nil {
+    log.Println("Error: ", err)
+    return
+}
+
+v.Idea = completion.Choices[0].Content
+v.Completed = true
+```
+The final step was sending everything to OpenAI. LangChain needs messages in a specific format called `MessageContent`, so I converted my formatted prompts using `TextParts`. The `GenerateContent` method handles the actual API call - it sends the prompts to OpenAI and waits for the response. Once I got the AI-generated itinerary back, I stored it in the `Idea` field and flipped `Completed` to `true`.
+
+## Where will I go next?
+After completing this "basic tutorial", I quickly went to [Udemy](https://udemy.com) to find some courses on AI with Go, which would let me take a deeper dive into AI and maybe ML. The first thing which popped up was a course by Trevor Sawler - [Introduction to AI and Machine Learning with Go (Golang)
+](https://www.udemy.com/course/introduction-to-ai-and-machine-learning-with-go-golang/), uploaded just two months back. Since I can credit everything I know about Go to his Udemy courses, enrolling in this course was a no-brainer for me. Naturally, I will be working through this course, hopefully documenting everything I learn along the way.

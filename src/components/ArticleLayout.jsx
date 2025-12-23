@@ -34,9 +34,9 @@ export function ArticleLayout({ article, children }) {
               type="button"
               onClick={() => router.back()}
               aria-label="Go back to articles"
-              className="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-[#16610E] shadow-md ring-1 shadow-zinc-800/5 ring-white transition lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 dark:border dark:border-black dark:bg-[#b6f500] dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20"
+              className="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-[#16610E] shadow-md ring-1 shadow-zinc-800/5 ring-[#dfc28d] transition lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0 dark:border dark:border-black dark:bg-[#b6f500] dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20 hover:cursor-pointer"
             >
-              <ArrowLeftIcon className="h-4 w-4 stroke-white transition group-hover:stroke-zinc-700 dark:stroke-black dark:group-hover:stroke-[#40210b]" />
+              <ArrowLeftIcon className="h-4 w-4 stroke-[#dfc28d] transition group-hover:stroke-zinc-700 dark:stroke-black dark:group-hover:stroke-[#40210b]" />
             </button>
           )}
           <article>
@@ -52,7 +52,7 @@ export function ArticleLayout({ article, children }) {
                 <span className="ml-3">{formatDate(article.date)}</span>
               </time>
             </header>
-            <Prose className="mt-8 text-black dark:text-white" data-mdx-content>
+            <Prose className="mt-8 text-black dark:text-white [&_a]:text-[#296757] dark:[&_a]:text-[#46edd5]" data-mdx-content>
               {children}
             </Prose>
           </article>
