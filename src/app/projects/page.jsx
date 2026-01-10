@@ -17,10 +17,10 @@ const projects = [
     logo: brainwave,
   },
   {
-    name: 'Go Movies',
+    name: 'Animaginary',
     description:
-      'A fullstack application, a Go based RESTful backend, a React based frontend & a POSTGRESQL database',
-    link: { href: 'https://movies-go-front.vercel.app/', label: 'Link to Go Movie' },
+      'High performance web animation library, hand-written in optimized WASM.',
+    link: { href: '#', label: 'github.com' },
     logo: logoAnimaginary,
   },
   {
