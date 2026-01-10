@@ -20,7 +20,7 @@ const projects = [
     name: 'Go Movies',
     description:
       'A fullstack application, a Go based RESTful backend, a React based frontend & a POSTGRESQL database',
-    link: { href: 'https://movies-go-front.vercel.app/', label: 'Link to Go Movies' },
+    link: { href: 'https://movies-go-front.vercel.app/', label: 'Link to Go Movie' },
     logo: logoAnimaginary,
   },
   {
