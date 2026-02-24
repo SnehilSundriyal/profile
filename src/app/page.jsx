@@ -220,8 +220,8 @@ function Resume() {
       {/*    <Role key={roleIndex} role={role} />*/}
       {/*  ))}*/}
       {/*</ol>*/}
-      <Button href='/resume.pdf' variant="primary" className="group w-full">
-        Download CV
+      <Button href='/resume.pdf' download variant="primary" className="group w-full">
+        Download Resume
         <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-[#2c1500] dark:stroke-[#2c1500] dark:group-hover:stroke-white dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
