@@ -12,7 +12,7 @@ import {
 } from '@/components/SocialIcons'
 import logoAirbnb from '../../public/images/logos/airbnb.svg'
 import logoFacebook from '../../public/images/logos/facebook.svg'
-import logoPlanetaria from '../../public/images/logos/planetaria.svg'
+import logoPlanetaria from '../../public/images/logos/ripplica.png'
 import logoStarbucks from '../../public/images/logos/starbucks.svg'
 import image1 from '../../public/image-1.jpg'
 import image2 from '../../public/image-2.jpg'
@@ -110,7 +110,7 @@ function Newsletter() {
   return (
     <form
       action="/thank-you"
-      className="rounded-2xl border border-[#2c1500] p-6 dark:border-black"
+      className="rounded-2xl border border-[#2c1500] p-6 dark:border-[#b09a76]"
     >
       <h2 className="flex text-sm font-semibold text-[#2c1500] dark:text-[#dfc28d]">
         <MailIcon className="h-6 w-6 flex-none" />
@@ -177,50 +177,40 @@ function Role({ role }) {
 function Resume() {
   let resume = [
     {
-      company: 'Planetaria',
-      title: 'CEO',
+      company: 'Ripplica',
+      title: 'Software Engineering Intern (AI Automation)',
       logo: logoPlanetaria,
-      start: '2019',
+      start: 'April 2026',
       end: {
-        label: 'Present',
+        label: 'May 2026',
         dateTime: new Date().getFullYear().toString(),
       },
     },
     {
-      company: 'Airbnb',
-      title: 'Product Designer',
-      logo: logoAirbnb,
-      start: '2014',
-      end: '2019',
+      company: 'CSIR - CSIO',
+      title: 'Research & Development Intern',
+      logo: logoPlanetaria,
+      start: 'May 2024',
+      end: {
+        label: 'July 2024',
+        dateTime: new Date().getFullYear().toString(),
+      },
     },
-    {
-      company: 'Facebook',
-      title: 'iOS Software Engineer',
-      logo: logoFacebook,
-      start: '2011',
-      end: '2014',
-    },
-    {
-      company: 'Starbucks',
-      title: 'Shift Supervisor',
-      logo: logoStarbucks,
-      start: '2008',
-      end: '2011',
-    },
+
   ]
 
   return (
     <div className="rounded-2xl border border-[#2c1500] p-6 dark:border-[#dfc28d]">
-      {/*<h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">*/}
-      {/*  <BriefcaseIcon className="h-6 w-6 flex-none" />*/}
-      {/*  <span className="ml-3">Work</span>*/}
-      {/*</h2>*/}
-      {/*<ol className="mt-6 space-y-4">*/}
-      {/*  {resume.map((role, roleIndex) => (*/}
-      {/*    <Role key={roleIndex} role={role} />*/}
-      {/*  ))}*/}
-      {/*</ol>*/}
-      <Button href='/resume.pdf' download variant="primary" className="group w-full">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Work</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {resume.map((role, roleIndex) => (
+          <Role key={roleIndex} role={role} />
+        ))}
+      </ol>
+      <Button href='/resume.pdf' download variant="primary" className="group w-full mt-3">
         Download Resume
         <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-[#2c1500] dark:stroke-[#2c1500] dark:group-hover:stroke-white dark:group-active:stroke-zinc-50" />
       </Button>
