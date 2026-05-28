@@ -12,7 +12,8 @@ import {
 } from '@/components/SocialIcons'
 import logoAirbnb from '../../public/images/logos/airbnb.svg'
 import logoFacebook from '../../public/images/logos/facebook.svg'
-import logoPlanetaria from '../../public/images/logos/ripplica.png'
+import logoRipplica from '../../public/images/logos/ripplica.png'
+import logoCsio from '../../public/images/logos/csio.png'
 import logoStarbucks from '../../public/images/logos/starbucks.svg'
 import image1 from '../../public/image-1.jpg'
 import image2 from '../../public/image-2.jpg'
@@ -148,16 +149,16 @@ function Role({ role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md ring-1 shadow-zinc-800/5 ring-zinc-900/5 dark:border dark:border-[#1C0F00FF] dark:bg-[#1C0F00FF] dark:ring-0">
         <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
-        <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+        <dd className="w-full flex-none text-sm font-medium text-[#2c1500] dark:text-[#dfc28d]">
           {role.company}
         </dd>
         <dt className="sr-only">Role</dt>
-        <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+        <dd className="text-xs text-[#40120b] dark:text-[#b09a76]">
           {role.title}
         </dd>
         <dt className="sr-only">Date</dt>
@@ -179,7 +180,7 @@ function Resume() {
     {
       company: 'Ripplica',
       title: 'Software Engineering Intern (AI Automation)',
-      logo: logoPlanetaria,
+      logo: logoRipplica,
       start: 'April 2026',
       end: {
         label: 'May 2026',
@@ -189,7 +190,7 @@ function Resume() {
     {
       company: 'CSIR - CSIO',
       title: 'Research & Development Intern',
-      logo: logoPlanetaria,
+      logo: logoCsio,
       start: 'May 2024',
       end: {
         label: 'July 2024',
@@ -201,7 +202,7 @@ function Resume() {
 
   return (
     <div className="rounded-2xl border border-[#2c1500] p-6 dark:border-[#dfc28d]">
-      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+      <h2 className="flex text-sm font-semibold text-[#2c1500] dark:text-[#dfc28d]">
         <BriefcaseIcon className="h-6 w-6 flex-none" />
         <span className="ml-3">Work</span>
       </h2>
@@ -210,7 +211,12 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href='/resume.pdf' download variant="primary" className="group w-full mt-3">
+      <Button
+        href="/resume.pdf"
+        download
+        variant="primary"
+        className="group mt-3 w-full"
+      >
         Download Resume
         <ArrowDownIcon className="h-4 w-4 stroke-white transition group-active:stroke-[#2c1500] dark:stroke-[#2c1500] dark:group-hover:stroke-white dark:group-active:stroke-zinc-50" />
       </Button>
@@ -313,7 +319,7 @@ export default async function Home() {
               <Article key={article.slug} article={article} />
             ))}
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-24">
+          <div className="space-y-10 lg:pl-16 xl:pl-24 text-[#40210b] dark:text-[#b09a76]">
             <Newsletter />
             <Resume />
           </div>
