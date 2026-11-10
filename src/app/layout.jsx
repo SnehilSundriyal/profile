@@ -1,34 +1,12 @@
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
-import localFont from 'next/font/local'
-import { Montserrat, Raleway } from 'next/font/google'
+import { site } from '@/data/site'
 
 import '@/styles/tailwind.css'
 
-const sfPro = localFont({
-  src: '../assets/fonts/SF-Pro-Display-Semibold.otf',
-  weight: '400',
-  variable: '--font-sf-pro',
-  display: 'swap',
-})
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-montserrat',
-  display: 'swap',
-})
-
-const oswald = Raleway({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-lora',
-  display: 'swap',
-})
-
 export const metadata = {
   title: {
-    template: '%s - Snehil Sundriyal',
+    template: `%s - ${site.name}`,
     default:
       'Snehil - Software developer, engineer and a musician.',
   },
@@ -46,10 +24,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`h-full antialiased ${montserrat.variable}`} suppressHydrationWarning>
-      <body className={`flex h-full${oswald.className} bg-[#bea882] dark:bg-[#1C0F00FF]`}>
+    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
+      <body className="flex h-full bg-canvas">
         <Providers>
-          <div className="flex w-full ">
+          <div className="flex w-full">
             <Layout>{children}</Layout>
           </div>
         </Providers>

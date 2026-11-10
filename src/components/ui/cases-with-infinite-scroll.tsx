@@ -95,7 +95,7 @@ function Case() {
       <div className="flex flex-col gap-10">
         <div className="relative">
           <div
-            className="relative w-full overflow-hidden flex justify-center items-center bg-[#bea882] dark:bg-[#1c0f00]"
+            className="relative w-full overflow-hidden flex justify-center items-center bg-canvas"
             style={{
               height: '50vh',
               perspective: '1000px',

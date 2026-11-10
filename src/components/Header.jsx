@@ -14,68 +14,9 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { ChevronDownIcon, CloseIcon, MoonIcon, SunIcon } from '@/components/Icons'
+import { navigation } from '@/data/site'
 import avatarImage from '../../public/images/avatar.jpg'
-
-function CloseIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="m17.25 6.75-10.5 10.5M6.75 6.75l10.5 10.5"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function ChevronDownIcon(props) {
-  return (
-    <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
-      <path
-        d="M1.75 1.75 4 4.25l2.25-2.5"
-        fill="none"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function SunIcon(props) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path d="M8 12.25A4.25 4.25 0 0 1 12.25 8v0a4.25 4.25 0 0 1 4.25 4.25v0a4.25 4.25 0 0 1-4.25 4.25v0A4.25 4.25 0 0 1 8 12.25v0Z" />
-      <path
-        d="M12.25 3v1.5M21.5 12.25H20M18.791 18.791l-1.06-1.06M18.791 5.709l-1.06 1.06M12.25 20v1.5M4.5 12.25H3M6.77 6.77 5.709 5.709M6.77 17.73l-1.061 1.061"
-        fill="none"
-      />
-    </svg>
-  )
-}
-
-function MoonIcon(props) {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
-      <path
-        d="M17.25 16.22a6.937 6.937 0 0 1-9.47-9.47 7.451 7.451 0 1 0 9.47 9.47ZM12.75 7C17 7 17 2.75 17 2.75S17 7 21.25 7C17 7 17 11.25 17 11.25S17 7 12.75 7Z"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
 
 function MobileNavItem({ href, children }) {
   return (
@@ -90,34 +31,34 @@ function MobileNavItem({ href, children }) {
 function MobileNavigation(props) {
   return (
     <Popover {...props}>
-      <PopoverButton className="group flex items-center rounded-full bg-[#dfc28d]/90 px-4 py-2 text-sm font-medium text-[#231100FF] shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:text-[#dfc28d] dark:ring-[#b09a76]/20 dark:hover:ring-[#b09a76]/40">
+      <PopoverButton className="group flex items-center rounded-full bg-chrome/90 px-4 py-2 text-sm font-medium text-ink shadow-lg ring-1 shadow-ink/20 ring-line-soft/30 backdrop-blur-sm hover:ring-line-soft/50">
         Menu
-        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-[#231100FF] group-hover:stroke-[#40210b] dark:stroke-[#b09a76] dark:group-hover:stroke-[#dfc28d]" />
+        <ChevronDownIcon className="ml-3 h-auto w-2 stroke-ink-muted group-hover:stroke-ink" />
       </PopoverButton>
       <PopoverBackdrop
         transition
-        className="fixed inset-0 z-50 bg-[#231100FF]/40 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-[#231100FF]/80"
+        className="fixed inset-0 z-50 bg-canvas/60 backdrop-blur-xs duration-150 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-canvas/80"
       />
       <PopoverPanel
         focus
         transition
-        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-[#dfc28d] p-8 ring-1 ring-[#b09a76]/20 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-[#40210b] dark:ring-[#b09a76]/30"
+        className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-surface p-8 ring-1 ring-line-soft/30 duration-150 data-closed:scale-95 data-closed:opacity-0 data-enter:ease-out data-leave:ease-in dark:bg-chrome"
       >
         <div className="flex flex-row-reverse items-center justify-between">
           <PopoverButton aria-label="Close menu" className="-m-1 p-1">
-            <CloseIcon className="h-6 w-6 text-[#231100FF] dark:text-[#b09a76]" />
+            <CloseIcon className="h-6 w-6 text-ink-muted" />
           </PopoverButton>
-          <h2 className="text-sm font-medium text-[#40210b] dark:text-[#b09a76]">
+          <h2 className="text-sm font-medium text-ink-muted">
             Navigation
           </h2>
         </div>
         <nav className="mt-6">
-          <ul className="-my-2 divide-y divide-[#b09a76]/20 text-base text-[#231100FF] dark:divide-[#b09a76]/10 dark:text-[#dfc28d]">
-            <MobileNavItem href="/about">About</MobileNavItem>
-            <MobileNavItem href="/articles">Articles</MobileNavItem>
-            <MobileNavItem href="/projects">Projects</MobileNavItem>
-            {/*<MobileNavItem href="/speaking">Speaking</MobileNavItem>*/}
-            <MobileNavItem href="/uses">Uses</MobileNavItem>
+          <ul className="-my-2 divide-y divide-line-soft/20 text-base text-ink">
+            {navigation.map((item) => (
+              <MobileNavItem key={item.href} href={item.href}>
+                {item.label}
+              </MobileNavItem>
+            ))}
           </ul>
         </nav>
       </PopoverPanel>
@@ -134,14 +75,12 @@ function NavItem({ href, children }) {
         href={href}
         className={clsx(
           'relative block px-3 py-2 transition',
-          isActive
-            ? 'text-[#16610e] dark:text-[#b6f500]'
-            : 'hover:text-[#16610e] dark:hover:text-[#b6f500]',
+          isActive ? 'text-accent' : 'hover:text-accent',
         )}
       >
         {children}
         {isActive && (
-          <span className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-[#16610e]/0 via-[#16610e]/40 to-[#16610e]/0 dark:from-[#b6f500]/0 dark:via-[#b6f500]/40 dark:to-[#b6f500]/0" />
+          <span className="absolute inset-x-1 -bottom-px h-px bg-linear-to-r from-accent/0 via-accent/40 to-accent/0" />
         )}
       </Link>
     </li>
@@ -151,12 +90,12 @@ function NavItem({ href, children }) {
 function DesktopNavigation(props) {
   return (
     <nav {...props}>
-      <ul className="flex rounded-full bg-[#bea882]/90 px-3 text-sm font-medium text-[#231100FF] shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:text-[#dfc28d] dark:ring-[#b09a76]/20">
-        <NavItem href="/about">About</NavItem>
-        <NavItem href="/articles">Articles</NavItem>
-        <NavItem href="/projects">Projects</NavItem>
-        {/*<NavItem href="/speaking">Speaking</NavItem>*/}
-        {/*<NavItem href="/uses">Uses</NavItem>*/}
+      <ul className="flex rounded-full bg-chrome/90 px-3 text-sm font-medium text-ink shadow-lg ring-1 shadow-ink/20 ring-line-soft/30 backdrop-blur-sm">
+        {navigation.map((item) => (
+          <NavItem key={item.href} href={item.href}>
+            {item.label}
+          </NavItem>
+        ))}
       </ul>
     </nav>
   )
@@ -175,11 +114,11 @@ function ThemeToggle() {
     <button
       type="button"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
-      className="group rounded-full bg-[#b6f500]/90 px-3 py-2 shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm transition dark:bg-[#16610e]/90 dark:ring-[#b09a76]/20 dark:hover:ring-[#b09a76]/40 hover:bg-[#16610e] dark:hover:bg-[#b6f500]"
+      className="group rounded-full bg-chrome/90 px-3 py-2 shadow-lg ring-1 shadow-ink/20 ring-line-soft/30 backdrop-blur-sm transition hover:ring-line-soft/50"
       onClick={() => setTheme(otherTheme)}
     >
-      <SunIcon className="h-6 w-6 fill-[#b09a76] stroke-[#40210b] transition group-hover:fill-[#dfc28d] group-hover:stroke-[#40210b] dark:hidden [@media(prefers-color-scheme:dark)]:fill-[#dfc28d] [@media(prefers-color-scheme:dark)]:stroke-[#40210b] [@media(prefers-color-scheme:dark)]:group-hover:fill-[#40210b] [@media(prefers-color-scheme:dark)]:group-hover:stroke-[#b09a76]" />
-      <MoonIcon className="hidden h-6 w-6 fill-[#40210b] stroke-[#dfc28d] transition not-[@media_(prefers-color-scheme:dark)]:fill-[#dfc28d]/20 not-[@media_(prefers-color-scheme:dark)]:stroke-[#b6f500] dark:block [@media(prefers-color-scheme:dark)]:group-hover:fill-[#dfc28d] [@media(prefers-color-scheme:dark)]:group-hover:stroke-[#40210b]" />
+      <SunIcon className="h-6 w-6 fill-line-soft/40 stroke-ink-muted transition group-hover:fill-line-soft group-hover:stroke-ink dark:hidden" />
+      <MoonIcon className="hidden h-6 w-6 fill-ink/10 stroke-accent transition group-hover:fill-ink/20 dark:block" />
     </button>
   )
 }
@@ -195,7 +134,7 @@ function AvatarContainer({ className, ...props }) {
     <div
       className={clsx(
         className,
-        'h-10 w-10 rounded-full bg-[#dfc28d]/90 p-0.5 shadow-lg ring-1 shadow-[#40210b]/20 ring-[#b09a76]/30 backdrop-blur-sm dark:bg-[#40210b]/90 dark:ring-[#b09a76]/20',
+        'h-10 w-10 rounded-full bg-chrome/90 p-0.5 shadow-lg ring-1 shadow-ink/20 ring-line-soft/30 backdrop-blur-sm',
       )}
       {...props}
     />
@@ -215,7 +154,7 @@ function Avatar({ large = false, className, ...props }) {
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
         className={clsx(
-          'rounded-full bg-[#dfc28d] object-cover dark:bg-[#231100FF]',
+          'rounded-full bg-surface object-cover',
           large ? 'h-16 w-16' : 'h-9 w-9',
         )}
         priority
